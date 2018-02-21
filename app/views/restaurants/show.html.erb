@@ -7,10 +7,16 @@
 </ul>
 <hr>
 <p>Reviews</p>
-<%= link_to "Add Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
 <ul>
   <% @restaurant.reviews.each do |review| %>
     <li><%= "#{review.rating} - #{review.content}" %></li>
   <% end %>
 </ul>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating, collection: 0..5 %>
+  <%= f.button :submit %>
+<% end %>
+
 <%= link_to "Back", restaurants_path%>
