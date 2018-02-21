@@ -1,0 +1,16 @@
+<h1><%= @restaurant.name %></h1>
+<ul>
+  <li>Address: <%=@restaurant.address%></li>
+  <li>Contact: <%=@restaurant.phone_number%></li>
+  <li>Category: <%=@restaurant.category%></li>
+  <li>Avg Rating: <%=@restaurant.reviews.average(:rating).round unless @restaurant.reviews.average(:rating).nil? %></li>
+</ul>
+<hr>
+<p>Reviews</p>
+<%= link_to "Add Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+<ul>
+  <% @restaurant.reviews.each do |review| %>
+    <li><%= "#{review.rating} - #{review.content}" %></li>
+  <% end %>
+</ul>
+<%= link_to "Back", restaurants_path%>
